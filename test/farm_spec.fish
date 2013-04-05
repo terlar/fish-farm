@@ -17,7 +17,7 @@ function it_handles_dashes
   test (farm --) = __help__
 end
 
-function it_outputs_farms_without_args
+function it_outputs_projects_without_args
   test (farm) = __ls__
 end
 
@@ -29,9 +29,9 @@ function it_outputs_command_with_known_command
   test (farm version) = __version__
 end
 
-function it_visits_farm_with_known_farm
-  function farm-find ; echo a_farm; end
-  test (farm a_farm) = "__visit__ a_farm"
+function it_visits_project_with_known_project
+  function farm-find ; echo a_project; end
+  test (farm a_project) = "__visit__ a_project"
 end
 
 . $fish_tank

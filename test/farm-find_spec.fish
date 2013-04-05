@@ -1,7 +1,7 @@
 . (dirname (status -f))/helper.fish
 
 function setup_tank
-  function farm-ls; echo 'a_farm'; end
+  function farm-ls; echo a_project; end
 end
 
 function clean_tank
@@ -9,7 +9,7 @@ function clean_tank
 end
 
 function it_matches_exactly
-  test (farm-find a_farm) = a_farm
+  test (farm-find a_project) = a_project
 end
 
 . $fish_tank

@@ -7,7 +7,7 @@ end
 
 set -l spec_path (dirname (status -f))
 
-set -xg farms $spec_path/farms
+set -xg farm $spec_path/farm
 
 . $spec_path/../share/fish-farm/farm.fish
 

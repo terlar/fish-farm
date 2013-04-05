@@ -1,15 +1,15 @@
 . (dirname (status -f))/helper.fish
 
 function setup_tank
-  mkdir $farms/a_farm
+  mkdir $farm/a_project
 end
 
 function clean_tank
-  rm -d $farms/a_farm
+  rm -d $farm/a_project
 end
 
-function it_contains_farms
-  contains a_farm (farm-ls)
+function it_contains_projects
+  contains a_project (farm-ls)
 end
 
 . $fish_tank

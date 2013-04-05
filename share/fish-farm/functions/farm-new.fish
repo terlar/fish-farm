@@ -1,18 +1,18 @@
-function farm-new --description 'Create a new farm'
+function farm-new --description 'Create a new project'
   if test (count $argv) -eq 0
-    echo 'farm-new: No <farm> given'
+    echo 'farm-new: No <project> given'
     return 1
   end
 
-  set -l farm $argv[1]
+  set -l project $argv[1]
 
-  if test (farm-find $farm)
-    echo "farm-new: Farm '$farm' already exist"
+  if test (farm-find $project)
+    echo "farm-new: Project '$project' already exist"
     return 1
   end
 
-  set -l command " mkdir $farms/$farm"
+  set -l command " mkdir $farm/$project"
   eval $command
 
-  farm-visit $farm
+  farm-visit $project
 end

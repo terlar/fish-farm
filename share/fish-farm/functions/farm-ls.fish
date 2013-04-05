@@ -1,3 +1,3 @@
-function farm-ls --description 'List available farms'
-  ls -1 $farms | cat
+function farm-ls --description 'List available projects'
+  ls -1 $farm | cat
 end
