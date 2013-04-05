@@ -1,6 +1,6 @@
 # fish-farm
 
-Farming your projects with [fish](https://github.com/fish-shell/fish-shell).
+Farming your projects with [fish](https://github.com/fish-shell/fish-shell) and [tmux](http://tmux.sf.net).
 
 ## Installation
 
