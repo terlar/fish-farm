@@ -12,8 +12,5 @@ if not contains $farm_path/completions $fish_complete_path
   set fish_complete_path $farm_path/completions $fish_complete_path
 end
 
-# Set CDPATH
-set CDPATH $CDPATH $farm
-
 # Alias
 function f ; farm $argv ; end
