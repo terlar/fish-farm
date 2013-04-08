@@ -8,7 +8,7 @@ function farm-visit --description 'Visit project'
   end
 
   set -l sessions (tmux list-sessions | cut -d ':' -f 1 ^/dev/null)
-  set -l environment (tmux show-environment | grep -v '^-' | sed 's|=| |')
+  set -l environment (tmux show-environment | grep -v '^-' | sed 's|=| |' ^/dev/null)
 
   for i in $environment
     set commands " set -xg $i;$commands"
