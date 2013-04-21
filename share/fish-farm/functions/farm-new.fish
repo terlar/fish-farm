@@ -11,8 +11,6 @@ function farm-new --description 'Create a new project'
     return 1
   end
 
-  set -l command " mkdir $farm/$project"
-  eval $command
-
+  eval " mkdir $farm/$project"
   farm-visit $project
 end
