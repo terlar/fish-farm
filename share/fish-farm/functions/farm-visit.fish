@@ -9,15 +9,9 @@ function farm-visit --description 'Visit project'
 
   set -l sessions (tmux list-sessions | cut -d ':' -f 1 ^/dev/null)
 
-  # Wrapper command for OSX clipboard
-  set -l wrapper
-  if which reattach-to-user-namespace >/dev/null
-    set wrapper "reattach-to-user-namespace -l $SHELL"
-  end
-
   if test -z "$TMUX"
     if not contains $project $sessions
-      tmux new -d -s $project $wrapper
+      tmux new -d -s $project
       tmux send-keys -t $project $commands Enter
     end
 

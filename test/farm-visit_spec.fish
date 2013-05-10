@@ -4,13 +4,12 @@ function setup_tank
   set -gx TMUX
 
   stub tmux which
-  function which-reattach-to-user-namespace; return 1; end
 
   mkdir $farm/a_project
 end
 
 function clean_tank
-  functions -e tmux which tmux-list-sessions which-tmux which-reattach-to-user-namespace
+  functions -e tmux which tmux-list-sessions which-tmux
   rm -d $farm/a_project
 end
 
