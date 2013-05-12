@@ -27,16 +27,3 @@ end
 function __farm_complete_commands
   farm help | grep '  ' | sed 's|^ *||;s|<.*> ||' | unexpand -t1
 end
-
-function __farm_complete_projects
-  set -l token (commandline -pt)
-  set -l list (farm ls | grep $token)
-
-  if test (count $list) -eq 1
-    commandline -t $list
-  else
-    for i in $list
-      echo $i
-    end
-  end
-end
