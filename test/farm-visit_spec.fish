@@ -26,7 +26,7 @@ function it_creates_a_new_tmux_session_when_not_in_sessions
 end
 
 function it_switches_directory_in_new_session_when_not_in_sessions
-  contains "tmux send-keys -t a_project  cd $farm/a_project; clear Enter" (farm-visit a_project)
+  contains "tmux send-keys -t a_project  farm cd a_project; clear Enter" (farm-visit a_project)
 end
 
 function it_attaches_new_session_when_not_in_sessions
@@ -40,7 +40,7 @@ function it_attaches_session_when_in_sessions
   end
 
   not contains 'tmux new -d -s a_project' (farm-visit a_project)
-  and not contains "tmux send-keys -t a_project  cd $farm/a_project; clear Enter" (farm-visit a_project)
+  and not contains "tmux send-keys -t a_project  farm cd a_project; clear Enter" (farm-visit a_project)
   and contains 'tmux attach -t a_project' (farm-visit a_project)
 end
 
@@ -52,7 +52,7 @@ end
 
 function it_switches_directory_in_new_session_when_in_tmux_and_not_in_sessions
   set -gx TMUX 'server'
-  contains "tmux send-keys -t a_project  cd $farm/a_project; clear Enter" (farm-visit a_project)
+  contains "tmux send-keys -t a_project  farm cd a_project; clear Enter" (farm-visit a_project)
 end
 
 function it_switches_to_new_session_when_in_tmux_and_not_in_sessions
@@ -68,7 +68,7 @@ function it_switches_to_session_when_in_tmux_and_in_sessions
   end
 
   not contains 'tmux if true new -d -s a_project' (farm-visit a_project)
-  and not contains "tmux send-keys -t a_project  cd $farm/a_project; clear Enter" (farm-visit a_project)
+  and not contains "tmux send-keys -t a_project  farm cd a_project; clear Enter" (farm-visit a_project)
   and contains 'tmux switch -t a_project' (farm-visit a_project)
 end
 

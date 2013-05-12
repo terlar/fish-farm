@@ -1,6 +1,6 @@
 function farm-visit --description 'Visit project'
   set -l project $argv[1]
-  set -l commands " cd $farm/$project; clear"
+  set -l commands " farm cd $project; clear"
 
   if not which tmux >/dev/null
     eval $commands
