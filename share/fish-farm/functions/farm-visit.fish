@@ -1,25 +1,19 @@
 function farm-visit --description 'Visit project'
   set -l project $argv[1]
-  set -l commands " farm cd $project; clear"
+  set -l commands "farm cd $project"
 
   if not which tmux >/dev/null
     eval $commands
     return
   end
 
-  set -l sessions (tmux list-sessions | cut -d ':' -f 1 ^/dev/null)
-
   if test -z "$TMUX"
-    if not contains $project $sessions
-      tmux new -d -s $project
-      tmux send-keys -t $project $commands Enter
-    end
-
-    tmux attach -t $project
+    tmux new -A -s $project "$commands; exec $SHELL"
   else
+    set -l sessions (tmux list-sessions | cut -d ':' -f 1 ^/dev/null)
+
     if not contains $project $sessions
-      tmux if true "new -d -s $project"
-      tmux send-keys -t $project $commands Enter
+      tmux if true "new -d -s $project '$commands; exec $SHELL'"
     end
 
     tmux switch -t $project
