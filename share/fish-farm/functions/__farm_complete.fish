@@ -1,8 +1,8 @@
-function __farm_complete --description 'Complete farm' --argument-names farm
+function __farm_complete --description 'Completions for farm' --argument-names farm
   complete -f -c $farm -n "__farm_needs_command $farm" -a '(__farm_complete_commands)'
-  complete -f -c $farm -n "__farm_needs_command $farm" -a '(__farm_complete_projects)' -d 'Project'
-  complete -f -c $farm -n '__farm_using_command cd' -a '(__farm_complete_projects)' -d 'Project'
-  complete -f -c $farm -n '__farm_using_command visit' -a '(__farm_complete_projects)' -d 'Project'
+  complete -f -c $farm -n "__farm_needs_command $farm" -a '(farm ls)' -d 'Project'
+  complete -f -c $farm -n '__farm_using_command cd'    -a '(farm ls)' -d 'Project'
+  complete -f -c $farm -n '__farm_using_command visit' -a '(farm ls)' -d 'Project'
 end
 
 function __farm_needs_command --argument-names farm
