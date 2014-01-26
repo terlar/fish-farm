@@ -12,7 +12,7 @@ function farm-visit --description 'Visit project'
   else
     set -l sessions (tmux list-sessions | cut -d ':' -f 1 ^/dev/null)
 
-    if not contains $project $sessions
+    if not contains -- $project $sessions
       tmux if true "new -d -s $project '$commands; exec $SHELL'"
     end
 
