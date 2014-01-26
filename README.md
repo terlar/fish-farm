@@ -1,4 +1,4 @@
-# fish-farm
+# fish-farm [![Build Status](https://travis-ci.org/terlar/fish-farm.png?branch=master)](https://travis-ci.org/terlar/fish-farm)
 
 Farming your projects with [fish](https://github.com/fish-shell/fish-shell) and [tmux](http://tmux.sf.net).
 
