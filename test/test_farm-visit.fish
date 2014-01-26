@@ -31,20 +31,20 @@ function suite_farm-visit
 
   function test_outside_tmux_without_session
     set TMUX ''
-    assert_includes "tmux new -A -s a_project farm cd a_project; exec $SHELL" (farm-visit a_project)
+    assert_includes "tmux new -A -s a_project farm cd a_project; $SHELL" (farm-visit a_project)
   end
 
   function test_inside_tmux_and_not_in_session
     set -l output (farm-visit b_project)
 
-    assert_includes "tmux if true new -d -s b_project 'farm cd b_project; exec $SHELL'" $output
+    assert_includes "tmux if true new -d -s b_project 'farm cd b_project; $SHELL'" $output
     assert_includes 'tmux switch -t b_project' $output
   end
 
   function test_inside_tmux_and_in_session
     set -l output (farm-visit a_project)
 
-    refute_includes "tmux if true new -d -s a_project 'farm cd a_project; exec $SHELL'" $output
+    refute_includes "tmux if true new -d -s a_project 'farm cd a_project; $SHELL'" $output
     assert_includes 'tmux switch -t a_project' $output
   end
 end
