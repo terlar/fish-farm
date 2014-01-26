@@ -8,12 +8,12 @@ function farm-visit --description 'Visit project'
   end
 
   if test -z "$TMUX"
-    tmux new -A -s $project "$commands; exec $SHELL"
+    tmux new -A -s $project "$commands; $SHELL"
   else
     set -l sessions (tmux list-sessions | cut -d ':' -f 1 ^/dev/null)
 
     if not contains -- $project $sessions
-      tmux if true "new -d -s $project '$commands; exec $SHELL'"
+      tmux if true "new -d -s $project '$commands; $SHELL'"
     end
 
     tmux switch -t $project
