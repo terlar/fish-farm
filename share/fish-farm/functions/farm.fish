@@ -3,6 +3,11 @@ function farm --description 'Fishy project switcher'
     set argv ls
   end
 
+  switch $argv[1]
+    case 'help' '-h' '--help'
+      farm-help; return
+  end
+
   set -l command $argv[1]
   set -e argv[1]
   set -l func_name "farm-$command"
