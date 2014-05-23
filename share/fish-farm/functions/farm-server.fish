@@ -1,9 +1,13 @@
 function farm-server --description 'Launch server for current project'
-  set -l type (farm-type)
-  test -z "$type"; and return 1
+  set -l abilities (farm-abilities)
+  test (count $abilities) -gt 0; or return 1
 
-  switch $type
-    case rails; rails server
-    case rack ; rackup
+  switch "$abilities"
+    case '*rails*'
+      rails server
+    case '*rack*'
+      rackup
+    case '*'
+      return 1
   end
 end
