@@ -1,5 +1,5 @@
 NAME=fish-farm
-VERSION=0.0.1
+VERSION=0.0.2
 AUTHOR=terlar
 URL=https://github.com/$(AUTHOR)/$(NAME)
 
