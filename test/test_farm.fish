@@ -4,11 +4,11 @@ function suite_farm
     function farm-falsy ; false; end
     function farm-args  ; echo $argv; end
 
-    mkdir -p $farm
+    mkdir -p $farm/a_project
   end
 
   function teardown
-    rm -r $farm
+    rm -r $farm/a_project
   end
 
   function test_empty_arguments
