@@ -7,8 +7,11 @@ function farm-abilities --description 'Display project abilities (default to cur
     set project_root $farm/$argv[1]
   end
 
-  if test -f $project_root/bin/console
-    echo console
+  for file in bin/console script/console
+    if test -f $project_root/$file
+      echo console
+      break
+    end
   end
 
   if test -f $project_root/Gemfile

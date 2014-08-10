@@ -15,6 +15,12 @@ function suite_farm-abilities
     assert_includes 'console' (farm abilities project)
     rm $farm/project/bin/console
     assert_empty (farm abilities project)
+
+    mkdir -p $farm/project/script
+    touch $farm/project/script/console
+    assert_includes 'console' (farm abilities project)
+    rm $farm/project/script/console
+    assert_empty (farm abilities project)
   end
 
   function test_bundler_ability
