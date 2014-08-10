@@ -1,8 +1,15 @@
 function farm-console --description 'Launch console for current project'
-  set -l type (farm-type)
-  test -z "$type"; and return 1
+  set -l abilities (farm-abilities)
+  test (count $abilities) -gt 0; or return 1
 
-  switch $type
-    case rails; rails console
+  switch "$abilities"
+    case '*console*'
+      ./bin/console
+    case '*rails*'
+      rails console
+    case '*bundler*'
+      bundle console
+    case '*'
+      return 1
   end
 end
