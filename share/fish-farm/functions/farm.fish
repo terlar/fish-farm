@@ -11,9 +11,11 @@ function farm --description 'Fishy project switcher'
   set -l command $argv[1]
   set -e argv[1]
   set -l func_name "farm-$command"
+  set -l return_status 0
 
   if functions -q $func_name
     eval $func_name $argv
+    set return_status $status
   else
     if test (farm-find $command)
       farm-visit $command
@@ -22,5 +24,5 @@ function farm --description 'Fishy project switcher'
     end
   end
 
-  return $status
+  return $return_status
 end
