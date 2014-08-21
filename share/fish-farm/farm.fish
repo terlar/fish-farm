@@ -1,5 +1,5 @@
 # Set defaults
-set -q farm ; or set -U farm $HOME/Code
+set -q farm ; or set -U farm $HOME/code
 
 # Path
 set -l farm_path (dirname (status -f))
