@@ -1,28 +1,28 @@
 function farm --description 'Fishy project switcher'
-  if test (count $argv) -eq 0
-    set argv ls
-  end
+	if test (count $argv) -eq 0
+		set argv ls
+	end
 
-  switch $argv[1]
-    case 'help' '-h' '--help'
-      farm-help; return
-  end
+	switch $argv[1]
+		case 'help' '-h' '--help'
+			farm-help; return
+	end
 
-  set -l command $argv[1]
-  set -e argv[1]
-  set -l func_name "farm-$command"
-  set -l return_status 0
+	set -l command $argv[1]
+	set -e argv[1]
+	set -l func_name "farm-$command"
+	set -l return_status 0
 
-  if functions -q $func_name
-    eval $func_name $argv
-    set return_status $status
-  else
-    if test (farm-find $command)
-      farm-visit $command
-    else
-      farm-help
-    end
-  end
+	if functions -q $func_name
+		eval $func_name $argv
+		set return_status $status
+	else
+		if test (farm-find $command)
+			farm-visit $command
+		else
+			farm-help
+		end
+	end
 
-  return $return_status
+	return $return_status
 end
