@@ -1,11 +1,8 @@
 function suite_farm-ls
 	function setup
+		stub_var farm (stub_dir)
 		mkdir -p $farm/a_project
 		mkdir -p $farm/b_project
-	end
-
-	function teardown
-		rm -r $farm
 	end
 
 	function test_lists_projects

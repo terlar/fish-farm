@@ -44,12 +44,12 @@ function suite_farm
 	end
 
 	function test_visits_project_with_known_project
-		function farm-visit_stub
-			echo 'farm-visit a_project'
+		function mux_stub
+			echo mux $argv
 		end
-		stub farm-visit farm-visit_stub
+		stub mux mux_stub
 
-		assert 'farm-visit a_project' (farm a_project)
+		assert "mux a_project $farm/a_project" (farm a_project)
 	end
 end
 

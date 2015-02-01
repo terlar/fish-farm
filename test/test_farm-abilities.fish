@@ -1,10 +1,7 @@
 function suite_farm-abilities
 	function setup
+		stub_var farm (stub_dir)
 		mkdir -p $farm/project
-	end
-
-	function teardown
-		rm -r $farm
 	end
 
 	function test_console_ability

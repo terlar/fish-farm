@@ -1,10 +1,7 @@
 function suite_farm-cd
 	function setup
+		stub_var farm (stub_dir)
 		mkdir -p $farm/a_project
-	end
-
-	function teardown
-		rm -r $farm
 	end
 
 	function test_changes_directory

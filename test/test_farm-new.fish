@@ -1,10 +1,7 @@
 function suite_farm-new
 	function setup
+		stub_var farm (stub_dir)
 		mkdir -p $farm/a_project
-	end
-
-	function teardown
-		rm -r $farm
 	end
 
 	function test_without_args
@@ -20,15 +17,15 @@ function suite_farm-new
 	end
 
 	function test_when_new
-		function farm-visit_stub
-			echo "farm-visit $argv"
+		function mux_stub
+			echo mux $argv
 		end
-		stub farm-visit farm-visit_stub
+		stub mux mux_stub
 
 		set -l output (farm-new new_project)
 		assert_equal 0 $status
 		assert (test -d $farm/new_project)
-		assert_equal 'farm-visit new_project' $output
+		assert_equal "mux new_project -c $farm/new_project" $output
 	end
 end
 
