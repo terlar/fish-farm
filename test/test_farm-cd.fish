@@ -1,12 +1,12 @@
 function suite_farm-cd
 	function setup
 		stub_var farm (stub_dir)
-		mkdir -p $farm/a_project
+		mkdir -p $farm/projects/a
 	end
 
 	function test_changes_directory
-		farm-cd a_project
-		assert_equal $farm/a_project $PWD
+		farm-cd projects/a
+		assert_equal $farm/projects/a $PWD
 	end
 end
 

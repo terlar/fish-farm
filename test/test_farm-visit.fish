@@ -1,15 +1,15 @@
 function suite_farm-visit
 	function setup
 		stub_var farm (stub_dir)
-		mkdir -p $farm/a_project
-		mkdir -p $farm/b_project
+		mkdir -p $farm/projects/a
+		mkdir -p $farm/projects/b
 	end
 
 	function test_changes_directory_without_mux
 		stub_var PATH /usr/bin
 
-		farm-visit a_project
-		assert_equal $farm/a_project $PWD
+		farm-visit projects/a
+		assert_equal $farm/projects/a $PWD
 	end
 
 	function test_uses_mux_when_available
@@ -18,7 +18,7 @@ function suite_farm-visit
 		end
 		stub mux mux_stub
 
-		assert_equal "mux a_project -c $farm/a_project" (farm-visit a_project)
+		assert_equal "mux projects/a -c $farm/projects/a" (farm-visit projects/a)
 	end
 end
 

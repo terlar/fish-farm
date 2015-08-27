@@ -1,18 +1,18 @@
 function suite_farm-find
 	function setup
 		stub_var farm (stub_dir)
-		mkdir -p $farm/a_project
-		mkdir -p $farm/a_projecta
+		mkdir -p $farm/projects/ab
+		mkdir -p $farm/projects/aba
 	end
 
 	function test_known_project
-		set -l output (farm-find a_project)
+		set -l output (farm-find projects/ab)
 		assert_equal 0 $status
-		assert_equal a_project $output
+		assert_equal projects/ab $output
 	end
 
 	function test_unknown_project
-		set -l output (farm-find b_project)
+		set -l output (farm-find projects/b)
 		assert_equal 1 $status
 		assert_empty $output
 	end

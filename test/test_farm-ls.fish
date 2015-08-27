@@ -1,13 +1,13 @@
 function suite_farm-ls
 	function setup
 		stub_var farm (stub_dir)
-		mkdir -p $farm/a_project
-		mkdir -p $farm/b_project
+		mkdir -p $farm/projects/a
+		mkdir -p $farm/projects/b
 	end
 
 	function test_lists_projects
-		assert_includes a_project (farm-ls)
-		assert_includes b_project (farm-ls)
+		assert_includes projects/a (farm-ls)
+		assert_includes projects/b (farm-ls)
 	end
 end
 

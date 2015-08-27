@@ -4,11 +4,11 @@ function suite_farm
 		function farm-falsy ; false; end
 		function farm-args	; echo $argv; end
 
-		mkdir -p $farm/a_project
+		mkdir -p $farm/projects/a
 	end
 
 	function teardown
-		rm -r $farm/a_project
+		rm -r $farm/projects/a
 	end
 
 	function test_empty_arguments
@@ -49,7 +49,7 @@ function suite_farm
 		end
 		stub mux mux_stub
 
-		assert "mux a_project $farm/a_project" (farm a_project)
+		assert "mux projects/a $farm/projects/a" (farm projects/a)
 	end
 end
 
