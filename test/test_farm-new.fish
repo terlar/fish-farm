@@ -1,7 +1,7 @@
 function suite_farm-new
 	function setup
 		stub_var farm (stub_dir)
-		mkdir -p $farm/a_project
+		mkdir -p $farm/projects/a
 	end
 
 	function test_without_args
@@ -11,9 +11,9 @@ function suite_farm-new
 	end
 
 	function test_with_existing_project
-		set -l output (farm-new a_project)
+		set -l output (farm-new projects/a)
 		assert_equal 1 $status
-		assert_equal "farm-new: Project 'a_project' already exist" $output
+		assert_equal "farm-new: Project 'projects/a' already exist" $output
 	end
 
 	function test_when_new
@@ -22,10 +22,10 @@ function suite_farm-new
 		end
 		stub mux mux_stub
 
-		set -l output (farm-new new_project)
+		set -l output (farm-new projects/new)
 		assert_equal 0 $status
-		assert (test -d $farm/new_project)
-		assert_equal "mux new_project -c $farm/new_project" $output
+		assert (test -d $farm/projects/new)
+		assert_equal "mux projects/new -c $farm/projects/new" $output
 	end
 end
 

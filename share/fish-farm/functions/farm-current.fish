@@ -3,11 +3,11 @@ function farm-current --description 'Display current project name'
 
 	test $PWD = $relative_path; and return 1
 
-	set -l dirname (dirname $relative_path)
+	set -l projects (farm-ls)
 
-	if test $dirname = .
-		echo $relative_path
-	else
-		echo $dirname
+	while not contains -- $relative_path $projects
+		set relative_path (dirname $relative_path)
 	end
+
+	echo $relative_path
 end

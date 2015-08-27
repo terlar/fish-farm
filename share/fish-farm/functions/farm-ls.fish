@@ -1,3 +1,5 @@
 function farm-ls --description 'List available projects'
-	ls -1 $farm | cat
+	for project in $farm/*/*
+		echo $project | sed "s|$farm/||"
+	end
 end
