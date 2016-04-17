@@ -1,13 +1,12 @@
-function farm-current --description 'Display current project name'
-	set -l relative_path (echo $PWD | sed "s|$farm/||")
+function farm-current --description 'Display current repository name'
+	set -l root (ghq root)
 
-	test $PWD = $relative_path; and return 1
-
-	set -l projects (farm-ls)
-
-	while not contains -- $relative_path $projects
-		set relative_path (dirname $relative_path)
+	for repo in (farm-ls)
+		if string match -q "$root/$repo*" $PWD
+			echo $repo
+			return 0
+		end
 	end
 
-	echo $relative_path
+	return 1
 end

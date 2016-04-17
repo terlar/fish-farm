@@ -1,15 +1,7 @@
 function suite_farm-visit
 	function setup
-		stub_var farm (stub_dir)
-		mkdir -p $farm/projects/a
-		mkdir -p $farm/projects/b
-	end
-
-	function test_changes_directory_without_mux
-		stub_var PATH /usr/bin
-
-		farm-visit projects/a
-		assert_equal $farm/projects/a $PWD
+		stub_var GHQ_ROOT (stub_dir)
+		mkdir -p $GHQ_ROOT/user/repo_a/.git
 	end
 
 	function test_uses_mux_when_available
@@ -18,11 +10,8 @@ function suite_farm-visit
 		end
 		stub mux mux_stub
 
-		assert_equal "mux projects/a -c $farm/projects/a" (farm-visit projects/a)
+		assert_equal 'mux repo_a ghq look user/repo_a' (farm-visit user/repo_a)
 	end
 end
 
-if not set -q tank_running
-	source (dirname (status -f))/helper.fish
-	tank_run
-end
+source (dirname (status -f))/helper.fish

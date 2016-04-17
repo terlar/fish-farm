@@ -1,24 +1,25 @@
 function suite_farm-find
 	function setup
-		stub_var farm (stub_dir)
-		mkdir -p $farm/projects/ab
-		mkdir -p $farm/projects/aba
+		stub_var GHQ_ROOT (stub_dir)
+		mkdir -p $GHQ_ROOT/user/repo_a/.git
+		mkdir -p $GHQ_ROOT/user/repo_ab/.git
 	end
 
-	function test_known_project
-		set -l output (farm-find projects/ab)
+	function test_known_repo
+		set output (farm-find user/repo_a)
 		assert_equal 0 $status
-		assert_equal projects/ab $output
+		assert_equal user/repo_a $output
+
+		set output (farm-find user/repo_ab)
+		assert_equal 0 $status
+		assert_equal user/repo_ab $output
 	end
 
 	function test_unknown_project
-		set -l output (farm-find projects/b)
+		set output (farm-find user/repo_b)
 		assert_equal 1 $status
 		assert_empty $output
 	end
 end
 
-if not set -q tank_running
-	source (dirname (status -f))/helper.fish
-	tank_run
-end
+source (dirname (status -f))/helper.fish

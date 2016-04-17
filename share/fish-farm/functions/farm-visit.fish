@@ -1,9 +1,16 @@
-function farm-visit --description 'Visit project'
-	set -l project $argv[1]
+function farm-visit --description 'Visit repository'
+	set -l repo (farm-find $argv | head -n1)
+
+	if test -z "$repo"
+		echo 'farm: unknown repo'
+		return 1
+	end
 
 	if type -q mux
-		mux $project -c $farm/$project
+		set -l name (string split -r -m1 '/' $repo | tail -n1)
+
+		mux $name ghq look $repo
 	else
-		farm cd $project
+		ghq look $repo
 	end
 end
