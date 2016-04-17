@@ -5,7 +5,8 @@ if not set -q tank_helper
 		exit 1
 	end
 
-	source (realpath (dirname (status -f))/../share/fish-farm/farm.fish)
+	set -l project_path (realpath (dirname (status -f))/..)
+	set fish_function_path $project_path/functions $fish_function_path
 	set -gx GHQ_ROOT /tmp/farm
 
 	source $fish_tank
