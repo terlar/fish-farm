@@ -1,16 +1,13 @@
-function farm-new --description 'Create a new project'
+function farm-new --description 'Create a new repository'
 	if test (count $argv) -eq 0
-		echo 'farm-new: No <project> given'
+		echo 'farm: no <repo> given'
 		return 1
 	end
 
-	set -l project $argv[1]
+	set -l repo $argv[1]
+	set -e argv[1]
 
-	if test (farm-find $project)
-		echo "farm-new: Project '$project' already exist"
-		return 1
-	end
+	ghq get $argv $repo
 
-	eval " mkdir $farm/$project"
-	farm-visit $project
+	farm-visit $repo
 end

@@ -1,4 +1,9 @@
-function farm --description 'Fishy project switcher'
+function farm --description 'Fishy repository switcher'
+	if not type -q ghq
+		echo 'farm: ghq is required'
+		return 1
+	end
+
 	if test (count $argv) -eq 0
 		set argv ls
 	end

@@ -1,17 +1,16 @@
 function suite_farm-ls
 	function setup
-		stub_var farm (stub_dir)
-		mkdir -p $farm/projects/a
-		mkdir -p $farm/projects/b
+		stub_var GHQ_ROOT (stub_dir)
+		mkdir -p $GHQ_ROOT/user/repo_a/.git
+		mkdir -p $GHQ_ROOT/user/repo_b/.git
+		mkdir -p $GHQ_ROOT/not_repo
 	end
 
-	function test_lists_projects
-		assert_includes projects/a (farm-ls)
-		assert_includes projects/b (farm-ls)
+	function test_lists_repos
+		assert_includes user/repo_a (farm-ls)
+		assert_includes user/repo_b (farm-ls)
+		refute_includes not_repo (farm-ls)
 	end
 end
 
-if not set -q tank_running
-	source (dirname (status -f))/helper.fish
-	tank_run
-end
+source (dirname (status -f))/helper.fish

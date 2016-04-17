@@ -1,11 +1,11 @@
-language: c
-before_install:
-  - sudo apt-get install bc
-  - curl -O http://fishshell.com/files/2.1.0/linux/Ubuntu/fish_2.1.0-1~precise_amd64.deb
-  - sudo dpkg --install fish_2.1.0-1~precise_amd64.deb
-  - git clone git://github.com/terlar/fish-tank.git
-  - cd fish-tank
-  - sudo make install
-  - cd -
+language: go
+
+install: 
+  - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
+  - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
+  - script/bootstrap.sh
+
+env:
+  - FISH_PPA=nightly-master
 
 script: make test

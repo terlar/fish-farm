@@ -1,8 +1,5 @@
-# Set defaults
-set -q farm ; or set -U farm $HOME/code
-
 # Path
-set -l farm_path (dirname (status -f))
+set -l farm_path (dirname (realpath (status -f)))
 
 if not contains $farm_path/functions $fish_function_path
 	set fish_function_path $farm_path/functions $fish_function_path

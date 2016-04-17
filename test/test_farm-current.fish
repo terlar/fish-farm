@@ -1,34 +1,31 @@
 function suite_farm-current
 	function setup
-		stub_var farm (stub_dir)
-		mkdir -p $farm/projects/a
+		stub_var GHQ_ROOT (stub_dir)
+		mkdir -p $GHQ_ROOT/user/repo_a/.git
 	end
 
-	function test_displays_current_project_if_active_without_relative_path
-		cd $farm/projects/a
+	function test_in_repo_root
+		cd $GHQ_ROOT/user/repo_a
 
-		set -l output (farm-current)
+		set output (farm-current)
 		assert_equal 0 $status
-		assert_equal projects/a $output
+		assert_equal user/repo_a $output
 	end
 
-	function test_displays_current_project_if_active_with_relative_path
-		mkdir -p $farm/projects/a/lvl1/lvl2
-		cd $farm/projects/a/lvl1/lvl2
+	function test_in_repo_sub_directory
+		mkdir -p $GHQ_ROOT/user/repo_a/lvl1/lvl2
+		cd $GHQ_ROOT/user/repo_a/lvl1/lvl2
 
-		set -l output (farm-current)
+		set output (farm-current)
 		assert_equal 0 $status
-		assert_equal projects/a $output
+		assert_equal user/repo_a $output
 	end
 
-	function test_displays_nothing_when_no_active
-		set -l output (farm-current)
+	function test_not_in_repo
+		set output (farm-current)
 		assert_equal 1 $status
 		assert_empty $output
 	end
 end
 
-if not set -q tank_running
-	source (dirname (status -f))/helper.fish
-	tank_run
-end
+source (dirname (status -f))/helper.fish
