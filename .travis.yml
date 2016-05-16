@@ -5,7 +5,6 @@ services:
 
 env:
   - FISH_REPO=nightly:/master
-  - FISH_REPO=release:/2
 
 before_install:  
   - sudo apt-get update
