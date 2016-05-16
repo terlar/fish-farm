@@ -1,3 +1,3 @@
 function farm-find --description 'Find repository'
-	farm-ls | grep -- "$argv\$"
+    farm-ls | grep -- "$argv\$"
 end
