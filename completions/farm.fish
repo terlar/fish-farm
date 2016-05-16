@@ -18,10 +18,10 @@ function __farm_using_command
 end
 
 function __farm_complete_commands
-	farm help | awk '/Commands:/{f=1;next}/^\s*$/{f=0}f' | string replace  -r '^\s+([^\s]+)\s+(.+)$' '$1'\t'$2'
+    farm help | awk '/Commands:/{f=1;next}/^\s*$/{f=0}f' | string replace -r '^\s+([^\s]+)\s+(.+)$' '$1'\t'$2'
 end
 
 complete -c farm -f -n '__farm_no_command' -a '(__farm_complete_commands)'
 complete -c farm -f -n '__farm_no_command' -a '(farm ls)' -d 'Project'
-complete -c farm -f -n '__farm_using_command cd'    -a '(farm ls)' -d 'Project'
+complete -c farm -f -n '__farm_using_command cd' -a '(farm ls)' -d 'Project'
 complete -c farm -f -n '__farm_using_command visit' -a '(farm ls)' -d 'Project'
