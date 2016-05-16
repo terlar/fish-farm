@@ -1,11 +1,17 @@
-language: go
+sudo: required
 
-install: 
-  - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace:$GOPATH"
-  - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
-  - script/bootstrap.sh
+services:
+  - docker
 
 env:
-  - FISH_PPA=nightly-master
+  - FISH_REPO=nightly:/master
 
-script: make test
+before_install:  
+  - sudo apt-get update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" -y --force-yes docker-engine
+
+install:
+  - docker build --build-arg=fish_repo="$FISH_REPO" -t fish-farm .
+
+script:
+  - docker run --rm -it fish-farm make test
