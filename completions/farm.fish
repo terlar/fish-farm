@@ -1,27 +1,42 @@
 function __farm_no_command
     set -l cmd (commandline -poc)
-    set -e cmd[1]
-    if test (count $cmd) -eq 0
-        return 0
+    if set -q cmd[2]
+        return 1
     end
-    return 1
+    return 0
 end
 
 function __farm_using_command
-    set cmd (commandline -poc)
-    if test (count $cmd) -gt 1
-        if test $argv[1] = $cmd[2]
-            return 0
-        end
+    set -l cmd (commandline -poc)
+    set -l found
+
+    test (count $cmd) -gt (count $argv)
+    or return 1
+
+    set -e cmd[1]
+
+    for i in $argv
+        contains -- $i $cmd
+        and set found $found $i
     end
-    return 1
+
+    test "$argv" = "$found"
 end
 
-function __farm_complete_commands
-    farm help | awk '/Commands:/{f=1;next}/^\s*$/{f=0}f' | string replace -r '^\s+([^\s]+)\s+(.+)$' '$1'\t'$2'
+function __farm_projects
+    set -l projects (farm ls)
+
+    __fish_seen_subcommand_from $projects
+    and return 1
+
+    printf '%s\n' $projects
 end
 
-complete -c farm -f -n '__farm_no_command' -a '(__farm_complete_commands)'
-complete -c farm -f -n '__farm_no_command' -a '(farm ls)' -d 'Project'
-complete -c farm -f -n '__farm_using_command cd' -a '(farm ls)' -d 'Project'
-complete -c farm -f -n '__farm_using_command visit' -a '(farm ls)' -d 'Project'
+function __farm_subcommands
+    farm help | awk '/Commands:/{f=1;next}/^\s*$/{f=0}f' | string replace -r '^\s+(\S+)\s(<\S+>|[A-Z]+)?\s*(.+)$' '$1'\t'$3'
+end
+
+complete -c farm -n '__farm_no_command' -f -a '(__farm_subcommands)'
+complete -c farm -n '__farm_no_command' -f -a '(__farm_projects)' -d 'Project'
+complete -c farm -n '__farm_using_command cd' -x -a '(__farm_projects)' -d 'Project'
+complete -c farm -n '__farm_using_command visit' -x -a '(__farm_projects)' -d 'Project'
